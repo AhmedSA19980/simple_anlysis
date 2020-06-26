@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width-device-width, initial-scale-1.0">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <title>Title</title>
+</head>
+<style>
+
+:root{
+    --main-radius: 10px;
+    --main-padding:10px;
+}
+.grid-container {
+  display: grid;
+  height:100vh;
+  grid-template-columns: 1fr 1fr 1fr 1fr ;
+  grid-template-rows: 0.2fr 3fr 1.2fr 1.3fr;
+  grid-template-areas:
+  " nav nav nav nav "
+  "sidebar main main main "
+  "sidebar content content2 content3 "
+  "sidebar  content4 content5 content6 "
+  "sidebar footer footer footer";
+  grid-gap:0.4rem;
+  font-family:"Inter",sans-serif;
+  font-weight:800;
+  text-transform:uppercase;
+  font-size:12px;
+  color: #004d40;
+  text-align:center;
+  background-color:white;
+
+}
+
+nav{
+    background-color:#a7ffeb;
+    grid-area:nav;
+    border-radius: var( --main-radius);
+    padding-top:var(--main-padding);
+
+
+
+}
+main{
+    width: 35em;
+    background-color: none;
+    grid-area:main;
+    border-radius: var( --main-radius);
+    padding-top:var(--main-padding);
+
+}
+
+#sidebar{
+    width:20em;
+    background-color:#031c30;
+    border: 3px solid green;
+    color:white;
+    grid-area:sidebar;
+    border-radius: var( --main-radius);
+    padding-top:var(--main-padding);
+
+}
+
+#content{
+
+    height: 90%;
+    padding: 12px;
+    margin:5px;
+    background-color:  #002b80;
+    grid-area:content;
+    border-radius: var( --main-radius);
+    padding-top:var(--main-padding);
+    box-shadow:5px 10px 8px #888888;
+}
+#content2{
+
+    height: 90%;
+    padding: 12px;
+    margin:5px;
+    background-color:rgb(19, 57, 134);
+    grid-area:content2;
+    border-radius: var( --main-radius);
+    padding-top:var(--main-padding);
+    box-shadow:5px 10px 8px #888888;
+}
+#content3{
+
+    height: 90%;
+    padding: 12px;
+    margin:5px;
+    background-color:  #0a558f;
+    grid-area:content3;
+    border-radius: var( --main-radius);
+    padding-top:var(--main-padding);
+     box-shadow:5px 10px 8px #888888;
+}
+#content4{
+
+    height: 90%;
+    padding: 12px;
+    margin:5px;
+    background-color: #0a558f ;
+    grid-area:content4;
+    border-radius: var( --main-radius);
+    padding-top:var(--main-padding);
+    box-shadow:5px 10px 8px #888888;
+}
+#content5{
+
+    height: 90%;
+    padding: 12px;
+    margin:5px;
+    background-color:  #0a558f;
+    grid-area:content5;
+    border-radius: var( --main-radius);
+    padding-top:var(--main-padding);
+    box-shadow:5px 10px 8px #888888;
+}
+#content6{
+
+    height: 90%;
+    padding: 12px;
+    margin:5px;
+    background-color:  #07395f ;
+    grid-area:content6;
+    border: 3px solid green;
+    border-radius: var( --main-radius);
+    padding-top:var(--main-padding);
+    box-shadow:5px 10px 8px #888888;
+}
+#footer{
+
+    background-color:#031c30;
+    border: 2px  solid green;
+    grid-area:footer;
+    border-radius: var( --main-radius);
+    padding-top:var(--main-padding);
+}
+@media only screen and (max-width: 550px){
+    .grid-container{
+     grid-template-columns:1fr;
+     grid-template-rows:0.4fr 0.4fr 2.2fr 1.2fr 1.2fr 1.2fr 1fr ;
+     grid-template-areas:
+     "nav"
+     "sidebar"
+     "main"
+     "content"
+     "content2"
+     "content3"
+     "content4"
+     "content5"
+     "content6"
+     "footer";
+
+    }
+    #sidebar{
+        width:auto;
+    }
+
+
+
+}
+
+
+.master p, h4{
+
+  width: auto;
+  margin-left:auto;
+  margin-right:auto;
+  font-size:20px;
+  color: white;
+  padding: 10px;
+
+}
+
+
+.card a{
+    background-color:none;
+    text-decoration:none;
+
+
+}
+
+.border1{
+    text-decoration:none;
+
+}
+ul{
+    display:inline;
+}
+li{
+    list-style-type:block;
+
+}
+li a{
+    display:flex;
+    color:white;
+    font-size: 16px;
+    margin-left:15px;
+
+
+    padding: 12px;
+
+
+}
+li a:hover{
+    color: gold;
+    text-decoration:none;
+}
+</style>
+<body>
+
+
+<div class="grid-container">
+    <nav>Nav
+    </nav>
+    <main>
+        <h1>OverView</h1><canvas id="myChart" width="150" height="80"></canvas>
+    <button class="btn btn-success" onclick="updateChart()">Update</button>
+    <button class="btn btn-success" onclick="addValue()">+1</button>
+    </main>
+    <div id="sidebar">Sidebar
+          <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">Lates</a></li>
+              <li><a href="#"> Book</a></li>
+              <li><a href="#">Discover</a></li>
+              <li><a href="#">About Us</a></li>
+        </ul>
+    </div>
+
+        <div class="master" id="content">
+            <h4>Total Earnings</h4>
+            <p >432424244</p>
+
+        </div>
+        <div class="master" id="content2"><h4>complete order</h4>
+            <div ><p>432424242</p></div>
+        </div>
+        <div class="master" id="content3">
+            <h4>Views</h4>
+            <div><p >432424242</p>
+            </div>
+
+        </div>
+        <div class="master" id="content4">
+            <h4>Profit</h4>
+            <div><p>432424244</p></div>
+        </div>
+        <div class="master" id="content5">
+            <h4>cancelled</h4>
+            <div><p >432424244</p></div>
+        </div>
+        <div class="master" id="content6">
+            <h4>Earned</h4>
+            <div><p>432424244</p></div>
+        </div>
+
+        <div id="footer"><h4>footer</h4></div>
+
+       <!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+</div>
+
+
+<script >
+var old_data = [0, 10, 5, 2, 20, 30, 45];
+var new_data = [10, 20, 30, 43, 50 ,60,70];
+var old_data1 = [99, 80, 75, 62, 50, 40, 35];
+var new_data1 = [5, 10, 15, 25, 35 ,60,70];
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+    // The type of chart we want to create
+    type: 'line',
+
+    // The data for our dataset
+    data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'My First dataset',
+            //backgroundColor: 'rgb(255,0,0)',
+            borderColor: 'rgb(0, 99, 132)',
+            data: old_data,
+        },{
+            label: 'My Second dataset',
+           //backgroundColor: 'rgb(255,0,0)',
+            borderColor: 'rgb(0, 200, 0)',
+            data: old_data1,
+        }
+        ]
+    },
+
+    // Configuration options go here
+    options: {}
+});
+    function updateChart(){
+       //chart.data.datasets[0].data = new_data;
+       //chart.data.datasets[1].data = new_data1;
+       chart.data.labels = ["August", "September", "October","November", "December"]
+       chart.update();
+
+    };
+
+    function addValue() {
+        chart.data.datasets[0].data.pop();
+        chart.data.datasets[0].data.push(256);
+        chart.data.labels.push("January");
+        chart.update();
+    }
+
+//    Update dynamic chart js | Chart.js Course
+</script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>
